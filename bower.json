@@ -1,0 +1,12 @@
+{
+	"name": "angular-require-lazy",
+	"version": "0.7.0-SNAPSHOT",
+	"private": true,
+	"dependencies": {
+		"angular": "1.x",
+		"requirejs": "2.x",
+		"require-lazy": "latest"
+	},
+	"devDependencies": {
+	}
+}
