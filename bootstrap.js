@@ -1,11 +1,11 @@
-define(['angular', './lazyAngularUtils', './promiseAdaptorAngular'], function(angular, lazyAngularUtils, promiseAdaptorAngular) {
+define(['angular', './lazyAngularUtils', './promiseAdaptorAngular', './currentModule'], function(angular, lazyAngularUtils, promiseAdaptorAngular, currentModule) {
 	'use strict';
 
 	function bootstrap(element, mainModule) {
 		var injector;
 		mainModule.config(lazyAngularUtils.cacheInternals);
 		mainModule.run(['$q', promiseAdaptorAngular.setQ]);
-//		currentModule.resolveWith(mainModule);
+		currentModule.resolveWith(mainModule);
 		lazyAngularUtils.makeLazyAngular();
 		injector = angular.bootstrap(element, [mainModule.name]);
 		promiseAdaptorAngular.setInjector(injector);

@@ -1,4 +1,4 @@
-define(['angular'], function(angular) {
+define(['angular', './currentModule'], function(angular, currentModule) {
 	'use strict';
 
 	var lazyAngularUtils, eagerAngularModuleFn = angular.module, cachedInternals = {}, lazyModules = {};
@@ -93,6 +93,15 @@ define(['angular'], function(angular) {
 		}
 	}
 
+	function makeLazyRouteResolve(requireLazyModule) {
+		return function() {
+			return requireLazyModule.get().then(['$injector', '$lazyLoadedModule', function($injector, $lazyLoadedModule) {
+				currentModule.resolveWith($lazyLoadedModule);
+				initLazyModules($injector);
+			}]);
+		};
+	}
+
 	cacheInternals.$inject = ['$provide', '$compileProvider', '$filterProvider', '$controllerProvider', '$animateProvider'];
 	function cacheInternals($provide, $compileProvider, $filterProvider, $controllerProvider, $animateProvider) {
 		cachedInternals.$provide = $provide;
@@ -106,6 +115,7 @@ define(['angular'], function(angular) {
 		cacheInternals: cacheInternals,
 		makeLazyAngular: makeLazyAngular,
 		initLazyModules: initLazyModules,
+		makeLazyRouteResolve: makeLazyRouteResolve,
 		modulesQueue: []
 	};
 
