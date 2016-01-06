@@ -1,7 +1,9 @@
 {
 	"name": "angular-require-lazy",
-	"version": "0.7.0-SNAPSHOT",
-	"private": true,
+	"version": "0.7.0",
+	"ignore": [
+		".gitignore"
+	],
 	"dependencies": {
 		"angular": "1.x",
 		"requirejs": "2.x",
